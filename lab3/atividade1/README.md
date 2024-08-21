@@ -1,0 +1,2 @@
+# Atividade 1
+REST spring boot com o seu exemplo (baseado no que passei) e testes com postman (coloque os prints do postman no readme além do código que estará no formato exportado do eclipse ou intellij)
