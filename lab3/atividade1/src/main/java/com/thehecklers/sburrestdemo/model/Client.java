@@ -16,7 +16,7 @@ public class Client
 
     public Client(String id, String name)
     {
-        this.id = id;
+        this.id = id == null ? UUID.randomUUID().toString() : id;
         this.name = name;
     }
 

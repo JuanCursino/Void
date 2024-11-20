@@ -34,10 +34,8 @@ public class ClientService
         return null;
     }
 
-    public Client addClient(String name)
+    public Client addClient(Client client)
     {
-        Client client = new Client(name);
-
         clients.add(client);
 
         return client;

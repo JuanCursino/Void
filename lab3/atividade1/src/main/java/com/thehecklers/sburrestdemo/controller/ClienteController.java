@@ -34,9 +34,9 @@ public class ClienteController
     }
 
     @PostMapping
-    Client addClient(@RequestBody String name)
+    Client addClient(@RequestBody Client client)
     {
-        return clientService.addClient(name);
+        return clientService.addClient(client);
     }
 
     @PutMapping("/{id}")
