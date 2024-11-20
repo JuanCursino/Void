@@ -43,19 +43,14 @@ public class ClientService
         return client;
     }
 
-    public Client editClient(String id, String name)
+    public Client editClient(String id, Client editedClient)
     {
-        for (Client client : clients)
-        {
-            if (client.getId().equals(id))
-            {
-                client.setName(name);
-                
-                return client;
-            }
-        }
+        Client client = getClientById(id);
 
-        return null;
+        if (client != null)
+            client.setName(editedClient.getName());
+                
+        return client;
     }
     
 }

@@ -36,12 +36,12 @@ public class ClienteController
     @PostMapping
     Client addClient(@RequestBody String name)
     {
-        return addClient(name);
+        return clientService.addClient(name);
     }
 
-    @PutMapping
-    Client editClient(@PathVariable String id, @RequestBody String name)
+    @PutMapping("/{id}")
+    Client editClient(@PathVariable String id, @RequestBody Client client)
     {
-        return editClient(id, name);
+        return clientService.editClient(id, client);
     }
 }
