@@ -50,5 +50,18 @@ public class ClientService
                 
         return client;
     }
+
+    public Boolean deleteClient(String id)
+    {
+        Client client = getClientById(id);
+
+        if (client != null)
+        {
+            clients.remove(client);
+            return true;
+        }
+
+        return false;
+    }
     
 }
