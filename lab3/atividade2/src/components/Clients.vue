@@ -4,6 +4,7 @@
       class="align-centerfill-height mx-auto"
       max-width="900"
     >
+    <h1>Clients</h1>
     <v-data-table :items="clients" @click:row="editClient" />
 
     <v-dialog v-model="clientDialog">
@@ -16,7 +17,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" text @click="clientDialog = false">Cancel</v-btn>
-          <v-btn color="success" text @click="deleteTag">Save</v-btn>
+          <v-btn color="success" text @click="saveClient">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -78,6 +79,17 @@ export default {
     {
       this.clientIdx = -1
       this.client = {}
+    },
+    async saveClient()
+    {
+      if (this.isUpdateMode)
+      {
+        try {
+          const response = axios.put(`http://localhost:8080/clients/${this.client.id}`, { name: this.client.name})
+        } catch(e) {
+          console.error(`Failed to edit client (${e})`)
+        }
+      }
     }
   }
 }
