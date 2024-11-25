@@ -2,7 +2,7 @@
 REST spring boot com o seu exemplo (baseado no que passei) e testes com postman (coloque os prints do postman no readme além do código que estará no formato exportado do eclipse ou intellij)
 
 ## Código exportado
-[Atividade1.7z](./artifacts/compressed-project/atividade1.7z)
+[Atividade1.7z](https://drive.google.com/file/d/1k_KgchYEJAnu_dSHNhvR4SZzzIA1Cgv5/view?usp=sharing)
 
 ## Prints de requisições via Postman
 ### CRUD operations
