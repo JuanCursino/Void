@@ -4,7 +4,7 @@
       class="align-centerfill-height mx-auto"
       max-width="900"
     >
-    <v-data-table :items="items"></v-data-table>
+    <v-data-table :items="clients"></v-data-table>
     </v-responsive>
   </v-container>
 </template>
@@ -16,7 +16,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      items: [
+      clients: [
         {
           id: '4636d367-876c-8274-6578-f938466fcd4',
           name: 'John Doe',
