@@ -57,6 +57,15 @@
       </v-card>
     </v-dialog>
 
+    <v-snackbar 
+      v-model="snackbar.show"
+      :timeout="3000"
+      :color="snackbar.color"
+      elevation="24"
+    >
+      {{ this.snackbar.message }}
+    </v-snackbar>
+
     </v-responsive>
   </v-container>
 </template>
@@ -83,7 +92,12 @@ export default {
         {title: "Id", key: "id"},
         {title: "Name", key: "name"},
         {title: "", key: "actions"}
-      ]
+      ],
+      snackbar: {
+        show: false,
+        color: "green",
+        message: ''
+      }
     };
   },
   watch: {
@@ -118,7 +132,7 @@ export default {
     editClient(client)
     {
       this.clientIdx = this.clients.indexOf(client)
-      this.client = this.clients[this.clientIdx]
+      this.client = {...this.clients[this.clientIdx]}
       this.isUpdateMode = true
       this.clientDialog = true
     },
@@ -133,17 +147,22 @@ export default {
       {
         try {
           const response = await axios.put(`http://localhost:8080/clients/${this.client.id}`, { name: this.client.name })
+          this.clients[this.clientIdx] = this.client
+          this.showSnackbar("Client updated successfully", "green")
         } catch(e) {
           console.error(`Failed to edit client (${e})`)
+          this.showSnackbar("Failed to update the client info", "red")
         }
       } else {
         try {
           const response = await axios.post("http://localhost:8080/clients", { name: this.client.name })
           this.clients.unshift(response.data)
           this.client = response.data
+          this.showSnackbar("Client saved successfully", "green")
           this.isUpdateMode = true
         } catch(e) {
           console.error(`Failed to save client (${e})`)
+          this.showSnackbar("Failed to save the client", "red")
         }
       }
     },
@@ -163,9 +182,17 @@ export default {
         const response = await axios.delete(`http://localhost:8080/clients/${this.client.id}`)
         this.clients.splice(this.clientIdx, 1)
         this.clientDeleteDialog = false
+        this.showSnackbar("Client removed successfully", "green")
       } catch (e) {
         console.error(`Failed to delete client (${e})`)
+        this.showSnackbar("Failed to remove the client", "red")
       }
+    },
+    showSnackbar(msg, color)
+    {
+      this.snackbar.message = msg
+      this.snackbar.color = color
+      this.snackbar. show = true
     }
   }
 }
