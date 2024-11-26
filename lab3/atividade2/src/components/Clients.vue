@@ -10,7 +10,24 @@
       <v-btn class="ma-2" icon="mdi-plus-circle-outline" color="green" size="large" @click="createClient"></v-btn>
     </v-container>
 
-    <v-data-table :items="clients" @click:row="editClient" />
+    <v-data-table :items="clients" :headers="headers">
+      <template v-slot:item.actions="{ item }">
+        <v-icon
+          size="large"
+          color="yellow"
+          @click="editClient(item)"
+        >
+          mdi-pencil
+        </v-icon>
+        <v-icon
+          size="large"
+          color="red"
+          @click="deleteClient(item)"
+        >
+          mdi-delete
+        </v-icon>
+      </template>
+    </v-data-table>
 
     <v-dialog v-model="clientDialog">
       <v-card>
@@ -23,6 +40,19 @@
           <v-spacer></v-spacer>
           <v-btn color="primary" text @click="clientDialog = false">Cancel</v-btn>
           <v-btn color="success" text @click="saveClient">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="clientDeleteDialog" max-width="500px">
+      <v-card>
+        <v-card-title class="text-h5 card">Are you sure that you want to delete 
+          <span class="text-red text--darken-2">{{ this.client.name }}</span>?
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" variant="text" @click="clientDeleteDialog = false">Cancel</v-btn>
+          <v-btn color="red" variant="text" @click="removeClient">Delete</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -47,7 +77,13 @@ export default {
         }
       ],
       clientDialog: false,
-      isUpdateMode: false
+      clientDeleteDialog: false,
+      isUpdateMode: false,
+      headers: [
+        {title: "Id", key: "id"},
+        {title: "Name", key: "name"},
+        {title: "", key: "actions"}
+      ]
     };
   },
   watch: {
@@ -56,6 +92,12 @@ export default {
       {
         this.resetClient()
         this.isUpdateMode = false
+      }
+    },
+    clientDeleteDialog() {
+      if (!this.clientDeleteDialog)
+      {
+        this.resetClient()
       }
     }
   },
@@ -73,9 +115,9 @@ export default {
         console.error(`Error on getting all clients (${e})`)
       }
     },
-    editClient(event)
+    editClient(client)
     {
-      this.clientIdx = Array.from(event.target.closest('tr').parentNode.children).indexOf(event.target.closest('tr'))
+      this.clientIdx = this.clients.indexOf(client)
       this.client = this.clients[this.clientIdx]
       this.isUpdateMode = true
       this.clientDialog = true
@@ -108,8 +150,30 @@ export default {
     createClient()
     {
       this.clientDialog = true
+    },
+    deleteClient(client)
+    {
+      this.clientIdx = this.clients.indexOf(client)
+      this.client = client
+      this.clientDeleteDialog = true
+    },
+    async removeClient()
+    {
+      try {
+        const response = await axios.delete(`http://localhost:8080/clients/${this.client.id}`)
+        this.clients.splice(this.clientIdx, 1)
+        this.clientDeleteDialog = false
+      } catch (e) {
+        console.error(`Failed to delete client (${e})`)
+      }
     }
   }
 }
 
 </script>
+
+<style scoped>
+.card {
+  white-space: normal;
+}
+</style>
