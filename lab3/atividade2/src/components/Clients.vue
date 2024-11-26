@@ -4,7 +4,12 @@
       class="align-centerfill-height mx-auto"
       max-width="900"
     >
-    <h1>Clients</h1>
+    <v-container class="d-flex align-center pe-2">
+      <h1>Clients</h1>
+      <v-spacer />
+      <v-btn class="ma-2" icon="mdi-plus-circle-outline" color="green" size="large" @click="createClient"></v-btn>
+    </v-container>
+
     <v-data-table :items="clients" @click:row="editClient" />
 
     <v-dialog v-model="clientDialog">
@@ -12,7 +17,7 @@
         <v-card-title class="text-h5">{{ (isUpdateMode ? "Edit" : "Create") + " " + "Client" }}</v-card-title>
         <v-container>
           <v-text-field v-if="isUpdateMode" v-model="client.id" disabled></v-text-field>
-          <v-text-field v-model="client.name"></v-text-field>
+          <v-text-field v-model="client.name" label="Name"></v-text-field>
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -85,11 +90,24 @@ export default {
       if (this.isUpdateMode)
       {
         try {
-          const response = axios.put(`http://localhost:8080/clients/${this.client.id}`, { name: this.client.name})
+          const response = await axios.put(`http://localhost:8080/clients/${this.client.id}`, { name: this.client.name })
         } catch(e) {
           console.error(`Failed to edit client (${e})`)
         }
+      } else {
+        try {
+          const response = await axios.post("http://localhost:8080/clients", { name: this.client.name })
+          this.clients.unshift(response.data)
+          this.client = response.data
+          this.isUpdateMode = true
+        } catch(e) {
+          console.error(`Failed to save client (${e})`)
+        }
       }
+    },
+    createClient()
+    {
+      this.clientDialog = true
     }
   }
 }
