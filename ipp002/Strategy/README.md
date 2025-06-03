@@ -38,7 +38,13 @@ src/main/java/
     └── PatternApplication.java    # Entry point with usage example
 ```
 
-### UML - Class Diagram
+### Use Cases
+
+* Teaching and practicing the Strategy Design Pattern.
+* Prototype for systems that require interchangeable behaviors (e.g., payments, sorting algorithms, shipping options).
+
+### Class Diagram
+
 ```mermaid
 classDiagram
     class PaymentStrategy {
@@ -70,10 +76,41 @@ classDiagram
     ShoppingCart --> PaymentStrategy
 ```
 
-### Use Cases
+### Anti-Pattern Example: Misusing Inheritance
 
-* Teaching and practicing the Strategy Design Pattern.
-* Prototype for systems that require interchangeable behaviors (e.g., payments, sorting algorithms, shipping options).
+Below is a class diagram showing a common anti-pattern when implementing Strategy: using inheritance without reuse.
+
+```mermaid
+classDiagram
+    class PaymentStrategy {
+        +pay(amount: double)
+    }
+
+    class CreditCardPayment {
+        +pay(amount: double)
+    }
+
+    class PayPalPayment {
+        +pay(amount: double)
+    }
+
+    class PixPayment {
+        +pay(amount: double)
+    }
+
+    class ShoppingCart {
+        -paymentStrategy: PaymentStrategy
+        +setPaymentStrategy(strategy: PaymentStrategy)
+        +checkout(amount: double)
+    }
+
+    PaymentStrategy <|-- CreditCardPayment
+    PaymentStrategy <|-- PayPalPayment
+    PaymentStrategy <|-- PixPayment
+    ShoppingCart --> PaymentStrategy
+```
+
+> 🚫 In this version, `PaymentStrategy` is a superclass instead of an interface, and no code is actually reused. Subclasses override `pay()` without leveraging inheritance — making this an anti-pattern.
 
 ### Next Steps (Optional)
 
