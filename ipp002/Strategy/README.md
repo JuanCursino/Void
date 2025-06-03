@@ -1,4 +1,4 @@
-# Payment Strategy Example
+# Payment Strategy Pattern
 
 ## Project Summary
 
@@ -22,7 +22,7 @@ To decouple the payment processing logic from the main application, allowing new
   * `PixPayment`
 * `ShoppingCart`: The context class that uses a selected payment strategy to perform checkout.
 
-### Benefits
+### Design Benefits
 
 * Follows the **Open/Closed Principle**: easily extendable without modifying core logic.
 * Promotes **code reuse and separation of concerns**.
@@ -117,3 +117,10 @@ classDiagram
 * Add new strategies like Cryptocurrency or Boleto.
 * Integrate discount strategies or tax calculations using the same pattern.
 * Apply unit tests for each strategy.
+
+## Running
+Place yourself in the root folder where the `pom.xml` is located — whether for a *pattern* or *anti-pattern* project. Then, run the following commands:
+
+```Bash
+mvn clean spring-boot:run
+```
