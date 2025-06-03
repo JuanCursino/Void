@@ -91,3 +91,55 @@ classDiagram
     Observer <|.. MobileAppDisplay
     WeatherStation --> Observer : notifies
 ```
+
+### Anti-Pattern Example: Tight Coupling Between Observer and Subject
+
+If the subject makes assumptions about specific observer implementations, you lose the decoupling the pattern is supposed to provide.
+
+`Why it’s bad`: Breaks the flexibility of the pattern and leads to fragile code.
+
+`Best Practice`: Communicate only through interfaces, never through concrete types.
+
+```mermaid
+classDiagram
+    class Subject {
+        <<interface>>
+        +registerObserver(o: Observer)
+        +removeObserver(o: Observer)
+        +notifyObservers()
+    }
+
+    class Observer {
+        <<interface>>
+        +update(temp: float, humidity: float, pressure: float)
+    }
+
+    class WeatherStation {
+        -observers: List<Observer>
+        -temperature: float
+        -humidity: float
+        -pressure: float
+        +registerObserver(o: Observer)
+        +removeObserver(o: Observer)
+        -notifyObservers()
+        +setMeasurements(temp: float, humidity: float, pressure: float)
+    }
+
+    class CurrentConditionsDisplay {
+        +update(temp: float, humidity: float, pressure: float)
+    }
+
+    class StatisticsDisplay {
+        +update(temp: float, humidity: float, pressure: float)
+    }
+
+    class MobileAppDisplay {
+        +update(temp: float, humidity: float, pressure: float)
+    }
+
+    Subject <|.. WeatherStation
+    Observer <|.. CurrentConditionsDisplay
+    Observer <|.. StatisticsDisplay
+    WeatherStation <|-- MobileAppDisplay
+    WeatherStation --> Observer : notifies
+```
