@@ -143,3 +143,11 @@ classDiagram
     WeatherStation <|-- MobileAppDisplay
     WeatherStation --> Observer : notifies
 ```
+
+## Running
+Place yourself in the root folder where the `pom.xml` is located — whether for a *pattern* or *anti-pattern* project. Then, run the following commands:
+
+```Bash
+mvn clean install
+mvn exec:java
+```
