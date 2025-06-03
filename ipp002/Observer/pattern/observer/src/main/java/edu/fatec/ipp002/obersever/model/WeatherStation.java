@@ -12,13 +12,13 @@ public class WeatherStation implements Subject
     private float humidity;
     private float pressure;
 
-    @Override
-    public void registerObserver(Observer observer) {
+    public void registerObserver(Observer observer)
+    {
         observers.add(observer);
     }
 
-    @Override
-    public void removeObserver(Observer observer) {
+    public void removeObserver(Observer observer)
+    {
         observers.remove(observer);
     }
 
