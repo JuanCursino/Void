@@ -85,11 +85,11 @@ classDiagram
         +update(temp: float, humidity: float, pressure: float)
     }
 
+    WeatherStation o--> Observer : notifies
     Subject <|.. WeatherStation
     Observer <|.. CurrentConditionsDisplay
     Observer <|.. StatisticsDisplay
     Observer <|.. MobileAppDisplay
-    WeatherStation --> Observer : notifies
 ```
 
 ### Anti-Pattern Example: Tight Coupling Between Observer and Subject
@@ -137,11 +137,11 @@ classDiagram
         +update(temp: float, humidity: float, pressure: float)
     }
 
+    WeatherStation o--> Observer : notifies
     Subject <|.. WeatherStation
     Observer <|.. CurrentConditionsDisplay
     Observer <|.. StatisticsDisplay
     WeatherStation <|-- MobileAppDisplay
-    WeatherStation --> Observer : notifies
 ```
 
 ## Running
