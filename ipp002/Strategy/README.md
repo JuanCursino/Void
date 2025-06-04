@@ -70,10 +70,10 @@ classDiagram
         +checkout(amount: double)
     }
 
+    ShoppingCart o--> PaymentStrategy : uses
     PaymentStrategy <|.. CreditCardPayment
     PaymentStrategy <|.. PayPalPayment
     PaymentStrategy <|.. PixPayment
-    ShoppingCart --> PaymentStrategy
 ```
 
 ### Anti-Pattern Example: Misusing Inheritance
@@ -104,10 +104,10 @@ classDiagram
         +checkout(amount: double)
     }
 
+    ShoppingCart o--> PaymentStrategy : uses
     PaymentStrategy <|-- CreditCardPayment
     PaymentStrategy <|-- PayPalPayment
     PaymentStrategy <|-- PixPayment
-    ShoppingCart --> PaymentStrategy
 ```
 
 > 🚫 In this version, `PaymentStrategy` is a superclass instead of an interface, and no code is actually reused. Subclasses override `pay()` without leveraging inheritance — making this an anti-pattern.
