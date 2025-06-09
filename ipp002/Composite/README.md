@@ -4,15 +4,15 @@
 
 **Project Name:** File System using the Composite Pattern
 
-### Overview
+## Overview
 
 This project demonstrates the **Composite Design Pattern** through a simplified file system model. It shows how to treat individual `files` (the **Leaf**) and `folders` (the **Composite**) (which may contain more files and folders) using a common interface, enabling recursive operations such as displaying structure.
 
-### Goal
+## Goal
 
 To demonstrate the Composite Design Pattern by modeling a hierarchical file system where both `File` and `Folder` can be treated uniformly through a shared interface.
 
-### Key Components
+## Key Components
 
 | Component                  | Responsibility                                            |
 | -------------------------- | --------------------------------------------------------- |
@@ -21,7 +21,7 @@ To demonstrate the Composite Design Pattern by modeling a hierarchical file syst
 | `Composite` class     | Holds children and implements recursive ops             |
 | `Client` | Uses the interface to treat all elements                              |
 
-### Design Benefits
+## Design Benefits
 
 * Uniformity: Treat Objects and Groups the Same Way.
 * Recursive Structures Made Easy.
@@ -30,7 +30,7 @@ To demonstrate the Composite Design Pattern by modeling a hierarchical file syst
 * Improves Code Reusability and Testability.
 * Clear Domain Modeling.
 
-### Folder Structure
+## Folder Structure
 
 ```
 src/main/java/
@@ -41,7 +41,7 @@ src/main/java/
     └── Main.java           # Entry point with usage example
 ```
 
-### Use Cases
+## Use Cases
 
 * **Modeling a File System:** Simulating or managing files and folders in a hierarchical structure.
 * **UI Component Hierarchies:** Graphical UIs often treat buttons, panels, labels, etc., as elements that can contain other elements.
@@ -51,7 +51,7 @@ src/main/java/
 * **Document Structures (e.g., HTML, XML, PDFs):** Texts made of paragraphs, tables, images, etc., where components can be nested.
 * **Permission and Role Hierarchies:** In complex security systems, roles or permissions can be grouped.
 
-### Class Diagram
+## Class Diagram
 ```mermaid
 classDiagram
     class FileSystemItem {
@@ -84,7 +84,7 @@ classDiagram
     FileSystemItem <--o Folder
 ```
 
-### Anti-Pattern Example: Leafs Implementing Useless Composite Methods
+## Anti-Pattern Example: Leafs Implementing Useless Composite Methods
 
 Sometimes developers force leaf classes (like `File`) to implement methods like `add()` or `remove()` which only make sense for composites (`Folder`).
 
