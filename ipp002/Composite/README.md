@@ -84,8 +84,55 @@ classDiagram
     FileSystemItem <--o Folder
 ```
 
+### Anti-Pattern Example: Leafs Implementing Useless Composite Methods
+
+Sometimes developers force leaf classes (like `File`) to implement methods like `add()` or `remove()` which only make sense for composites (`Folder`).
+
+> `File` has a stubbed or empty `add(FileSystemItem)` method just to fit the interface.
+
+`Why it's bad`:
+* Breaks the Liskov Substitution Principle
+* Leads to misleading or confusing APIs
+* Makes the code fragile and harder to maintain
+
+`Best Practice`: Use the transparent composite model only when all methods are meaningful to all types, or separate interfaces if not.
+ 
+ ```mermaid
+ classDiagram
+    class FileSystemItem {
+        <<interface>>
+        +add(item: FileSystemItem) void
+        +display(indent: String) void
+    }
+
+    class File {
+        <<Leaf>>
+        -name: String
+        +add(item: FileSystemItem) void
+        +display(indent: String) void
+    }
+
+    class Folder {
+        <<Composite>>>
+        -name: String
+        -children: List~FileSystemItem~
+        +add(item: FileSystemItem) void
+        +display(indent: String) void
+    }
+
+    class Main {
+        <<Client>>
+        +main(args: String[]) void
+    }
+
+    Main --> FileSystemItem
+    FileSystemItem <|.. File
+    FileSystemItem <|.. Folder
+    FileSystemItem <--o Folder
+ ```
+
 ## Running
-Place yourself in the root folder where the `pom.xml` is located. Then, run the following commands:
+Place yourself in the root folder where the `pom.xml` is located — whether for a *pattern* or *anti-pattern* project. Then, run the following commands:
 
 ```Bash
 mvn clean install
