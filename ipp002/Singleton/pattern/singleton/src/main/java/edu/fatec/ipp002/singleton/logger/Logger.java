@@ -23,7 +23,8 @@ public class Logger
                 true
             );
 
-            log("==== Application Started ====\n");
+            writer.println("\n");
+            log("==== Application logger started ====");
 
         } catch (Exception e)
         {
