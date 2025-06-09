@@ -1,7 +1,7 @@
 package edu.fatec.ipp002.composite;
 
-import edu.fatec.ipp002.composite.composite.File;
-import edu.fatec.ipp002.composite.leaf.Folder;
+import edu.fatec.ipp002.composite.composite.Folder;
+import edu.fatec.ipp002.composite.leaf.File;
 
 public class Main {
     public static void main(String[] args)

@@ -1,4 +1,4 @@
-package edu.fatec.ipp002.composite.leaf;
+package edu.fatec.ipp002.composite.composite;
 
 import java.util.ArrayList;
 import java.util.List;

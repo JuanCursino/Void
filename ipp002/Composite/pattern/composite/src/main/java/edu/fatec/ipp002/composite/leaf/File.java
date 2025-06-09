@@ -1,4 +1,4 @@
-package edu.fatec.ipp002.composite.composite;
+package edu.fatec.ipp002.composite.leaf;
 
 import edu.fatec.ipp002.composite.component.FileSystemItem;
 
