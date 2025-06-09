@@ -4,15 +4,15 @@
 
 **Project Name:** Flexible Payment System using the Strategy Pattern
 
-### Overview
+## Overview
 
 This project demonstrates the use of the **Strategy Design Pattern** to create a flexible and maintainable payment system. It models a basic online shopping scenario where customers can select different payment methods (e.g., Credit Card, PayPal, Pix) at checkout.
 
-### Goal
+## Goal
 
 To decouple the payment processing logic from the main application, allowing new payment methods to be added with minimal changes to the existing codebase.
 
-### Key Components
+## Key Components
 
 * `PaymentStrategy` (interface): Defines a common method `pay(double amount)` for all payment types.
 * Concrete strategies:
@@ -22,13 +22,13 @@ To decouple the payment processing logic from the main application, allowing new
   * `PixPayment`
 * `ShoppingCart`: The context class that uses a selected payment strategy to perform checkout.
 
-### Design Benefits
+## Design Benefits
 
 * Follows the **Open/Closed Principle**: easily extendable without modifying core logic.
 * Promotes **code reuse and separation of concerns**.
 * Supports **runtime selection** of payment algorithms.
 
-### Folder Structure
+## Folder Structure
 
 ```
 src/main/java/
@@ -38,12 +38,12 @@ src/main/java/
     └── PatternApplication.java    # Entry point with usage example
 ```
 
-### Use Cases
+## Use Cases
 
 * Teaching and practicing the Strategy Design Pattern.
 * Prototype for systems that require interchangeable behaviors (e.g., payments, sorting algorithms, shipping options).
 
-### Class Diagram
+## Class Diagram
 
 ```mermaid
 classDiagram
@@ -70,13 +70,13 @@ classDiagram
         +checkout(amount: double)
     }
 
+    ShoppingCart o--> PaymentStrategy : uses
     PaymentStrategy <|.. CreditCardPayment
     PaymentStrategy <|.. PayPalPayment
     PaymentStrategy <|.. PixPayment
-    ShoppingCart --> PaymentStrategy
 ```
 
-### Anti-Pattern Example: Misusing Inheritance
+## Anti-Pattern Example: Misusing Inheritance
 
 Below is a class diagram showing a common anti-pattern when implementing Strategy: using inheritance without reuse.
 
@@ -104,15 +104,15 @@ classDiagram
         +checkout(amount: double)
     }
 
+    ShoppingCart o--> PaymentStrategy : uses
     PaymentStrategy <|-- CreditCardPayment
     PaymentStrategy <|-- PayPalPayment
     PaymentStrategy <|-- PixPayment
-    ShoppingCart --> PaymentStrategy
 ```
 
 > 🚫 In this version, `PaymentStrategy` is a superclass instead of an interface, and no code is actually reused. Subclasses override `pay()` without leveraging inheritance — making this an anti-pattern.
 
-### Next Steps (Optional)
+## Next Steps (Optional)
 
 * Add new strategies like Cryptocurrency or Boleto.
 * Integrate discount strategies or tax calculations using the same pattern.

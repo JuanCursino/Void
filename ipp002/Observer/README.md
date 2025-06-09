@@ -4,15 +4,15 @@
 
 **Project Name:** Weather Station using the Observer Pattern
 
-### Overview
+## Overview
 
 This project demonstrates the **Observer Design Pattern** in a simple and practical way by modeling a weather monitoring system. A central `WeatherStation` (the **Subject**) gathers and distributes weather data to multiple **Observers** such as display units and mobile applications. Each observer updates itself automatically when the weather changes.
 
-### Goal
+## Goal
 
 To **decouple the core data source** (`WeatherStation`) from its dependent components (`Displays`) so they can evolve independently and be reused or replaced without affecting each other.
 
-### Key Components
+## Key Components
 
 | Component                  | Responsibility                                            |
 | -------------------------- | --------------------------------------------------------- |
@@ -23,13 +23,13 @@ To **decouple the core data source** (`WeatherStation`) from its dependent compo
 | `StatisticsDisplay`        | Tracks min, max, and average temperature                  |
 | `MobileAppDisplay`         | Simulates a mobile app notification system                |
 
-### Design Benefits
+## Design Benefits
 
 * Implements the **Observer Pattern** to decouple state from behavior.
 * Follows **Open/Closed Principle**: easily add new displays without modifying core logic.
 * Promotes flexibility and **runtime configurability** of observers.
 
-### Folder Structure
+## Folder Structure
 
 ```
 src/main/java/
@@ -40,13 +40,13 @@ src/main/java/
     └── Main.java            # Entry point with usage example
 ```
 
-### Use Cases
+## Use Cases
 
 * Teaching and practicing the Observer Pattern.
 * Prototyping modular notification systems.
 * Scenarios where multiple components depend on shared state changes
 
-### Class Diagram
+## Class Diagram
 
 ```mermaid
 classDiagram
@@ -85,14 +85,14 @@ classDiagram
         +update(temp: float, humidity: float, pressure: float)
     }
 
+    WeatherStation o--> Observer : notifies
     Subject <|.. WeatherStation
     Observer <|.. CurrentConditionsDisplay
     Observer <|.. StatisticsDisplay
     Observer <|.. MobileAppDisplay
-    WeatherStation --> Observer : notifies
 ```
 
-### Anti-Pattern Example: Tight Coupling Between Observer and Subject
+## Anti-Pattern Example: Tight Coupling Between Observer and Subject
 
 If the subject makes assumptions about specific observer implementations, you lose the decoupling the pattern is supposed to provide.
 
@@ -137,11 +137,11 @@ classDiagram
         +update(temp: float, humidity: float, pressure: float)
     }
 
+    WeatherStation o--> Observer : notifies
     Subject <|.. WeatherStation
     Observer <|.. CurrentConditionsDisplay
     Observer <|.. StatisticsDisplay
     WeatherStation <|-- MobileAppDisplay
-    WeatherStation --> Observer : notifies
 ```
 
 ## Running
