@@ -1,0 +1,15 @@
+
+
+2025-06-09T10:27:55.401671700 | ==== Application logger started ====
+2025-06-09T10:27:55.408315200 | Application started.
+2025-06-09T10:27:55.408315200 | Still the same logger instance!
+
+
+2025-06-09T10:28:03.002906400 | ==== Application logger started ====
+2025-06-09T10:28:03.003782300 | Application started.
+2025-06-09T10:28:03.003782300 | Still the same logger instance!
+
+
+2025-06-09T10:28:10.489352400 | ==== Application logger started ====
+2025-06-09T10:28:10.505875600 | Application started.
+2025-06-09T10:28:10.505875600 | Still the same logger instance!
