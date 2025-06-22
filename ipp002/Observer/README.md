@@ -1,52 +1,52 @@
-# Weather Station Observer Pattern
+# Estação Meteorológica com Padrão Observer
 
-## Project Summary
+## Resumo do Projeto
 
-**Project Name:** Weather Station using the Observer Pattern
+**Nome do Projeto:** Estação Meteorológica utilizando o Padrão Observer
 
-## Overview
+## Visão Geral
 
-This project demonstrates the **Observer Design Pattern** in a simple and practical way by modeling a weather monitoring system. A central `WeatherStation` (the **Subject**) gathers and distributes weather data to multiple **Observers** such as display units and mobile applications. Each observer updates itself automatically when the weather changes.
+Este projeto demonstra o **Padrão de Projeto Observer** de forma simples e prática, modelando um sistema de monitoramento climático. Uma central `WeatherStation` (o **Subject**) coleta e distribui dados meteorológicos para vários **Observers**, como unidades de exibição e aplicativos móveis. Cada observer se atualiza automaticamente quando há mudanças no clima.
 
-## Goal
+## Objetivo
 
-To **decouple the core data source** (`WeatherStation`) from its dependent components (`Displays`) so they can evolve independently and be reused or replaced without affecting each other.
+**Desacoplar a fonte de dados principal** (`WeatherStation`) dos seus componentes dependentes (`Displays`), permitindo que evoluam de forma independente e possam ser reutilizados ou substituídos sem impactar uns aos outros.
 
-## Key Components
+## Principais Componentes
 
-| Component                  | Responsibility                                            |
-| -------------------------- | --------------------------------------------------------- |
-| `Subject` interface        | Allows observers to register, unregister, and be notified |
-| `Observer` interface       | Declares the `update()` method observers must implement   |
-| `WeatherStation` class     | Holds weather data and notifies all observers             |
-| `CurrentConditionsDisplay` | Displays current temperature                              |
-| `StatisticsDisplay`        | Tracks min, max, and average temperature                  |
-| `MobileAppDisplay`         | Simulates a mobile app notification system                |
+| Componente                 | Responsabilidade                                                          |
+| -------------------------- | ------------------------------------------------------------------------- |
+| Interface `Subject`        | Permite que observers se registrem, cancelem registro e sejam notificados |
+| Interface `Observer`       | Declara o método `update()` que os observers devem implementar            |
+| Classe `WeatherStation`    | Armazena os dados climáticos e notifica todos os observers                |
+| `CurrentConditionsDisplay` | Exibe a temperatura atual                                                 |
+| `StatisticsDisplay`        | Acompanha temperatura mínima, máxima e média                              |
+| `MobileAppDisplay`         | Simula um sistema de notificações via aplicativo móvel                    |
 
-## Design Benefits
+## Benefícios do Design
 
-* Implements the **Observer Pattern** to decouple state from behavior.
-* Follows **Open/Closed Principle**: easily add new displays without modifying core logic.
-* Promotes flexibility and **runtime configurability** of observers.
+- Implementa o **Padrão Observer** para desacoplar estado de comportamento.
+- Segue o **Princípio Aberto/Fechado**: permite adicionar novos displays sem modificar a lógica principal.
+- Promove flexibilidade e **configuração dinâmica em tempo de execução** dos observers.
 
-## Folder Structure
+## Estrutura de Pastas
 
-```
+```plaintext
 src/main/java/
 └── edu/fatec/ipp002/observer/
-    ├── observer/            # Observer and Subject interfaces
-    ├── model/               # WeatherStation (the subject)
-    ├── display/             # Concrete observer classes
-    └── Main.java            # Entry point with usage example
+    ├── observer/            # Interfaces Observer e Subject
+    ├── model/               # WeatherStation (o subject)
+    ├── display/             # Classes concretas de observers
+    └── Main.java            # Ponto de entrada com exemplo de uso
 ```
 
-## Use Cases
+## Casos de Uso
 
-* Teaching and practicing the Observer Pattern.
-* Prototyping modular notification systems.
-* Scenarios where multiple components depend on shared state changes
+- Ensino e prática do Padrão Observer.
+- Protótipos de sistemas de notificações modulares.
+- Cenários onde múltiplos componentes dependem de mudanças em um estado compartilhado.
 
-## Class Diagram
+## Diagrama de Classes
 
 ```mermaid
 classDiagram
@@ -92,13 +92,13 @@ classDiagram
     Observer <|.. MobileAppDisplay
 ```
 
-## Anti-Pattern Example: Tight Coupling Between Observer and Subject
+## Exemplo de Anti-Padrão: Acoplamento Forte entre Observer e Subject
 
-If the subject makes assumptions about specific observer implementations, you lose the decoupling the pattern is supposed to provide.
+Se o subject faz suposições sobre implementações específicas dos observers, você perde o desacoplamento que o padrão deveria fornecer.
 
-`Why it’s bad`: Breaks the flexibility of the pattern and leads to fragile code.
+`Por que isso é ruim`: Quebra a flexibilidade do padrão e gera código frágil.
 
-`Best Practice`: Communicate only through interfaces, never through concrete types.
+`Melhor Prática`: Comunique-se apenas por meio de interfaces, nunca por tipos concretos.
 
 ```mermaid
 classDiagram
@@ -144,10 +144,11 @@ classDiagram
     WeatherStation <|-- MobileAppDisplay
 ```
 
-## Running
-Place yourself in the root folder where the `pom.xml` is located — whether for a *pattern* or *anti-pattern* project. Then, run the following commands:
+## Executando
 
-```Bash
+Estando na pasta raiz onde se encontra o `pom.xml` — seja para o projeto _padrão_ ou _anti-padrão_ —, execute os seguintes comandos:
+
+```bash
 mvn clean install
 mvn exec:java
 ```

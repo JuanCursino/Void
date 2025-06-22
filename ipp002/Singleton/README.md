@@ -1,55 +1,55 @@
-# Logger Singleton Pattern
+# Logger com Padrão Singleton
 
-## Project Summary
+## Resumo do Projeto
 
-**Project Name:** Logger using the Singleton Pattern
+**Nome do Projeto:** Logger utilizando o Padrão Singleton
 
-## Overview
+## Visão Geral
 
-This project demonstrates the use of the **Singleton Design Pattern** by implementing a simple Logger class. The logger is responsible for writing messages to a log file and ensures that only one instance is ever created and shared across the entire application.
+Este projeto demonstra o uso do **Padrão de Projeto Singleton** implementando uma classe simples de Logger. O logger é responsável por escrever mensagens em um arquivo de log e garante que apenas uma instância seja criada e compartilhada por toda a aplicação.
 
-## Goal
+## Objetivo
 
-To demonstrate how the Singleton pattern helps centralize access to a shared resource (in this case, a log file). Illustrating a real-world use case for a Singleton: logging, which must be consistent and globally accessible.
+Demonstrar como o padrão Singleton ajuda a centralizar o acesso a um recurso compartilhado (neste caso, um arquivo de log). Ilustrando um uso real de Singleton: logging, que deve ser consistente e globalmente acessível.
 
-## Key Components
+## Principais Componentes
 
-| Component                  | Responsibility                                            |
-| -------------------------- | --------------------------------------------------------- |
-| `Logger` Singleton class        | Guarantees a single instance, offers global access via getInstance(), and manages logging to a file. |
-| `Main` class       | Demonstrates usage of the Singleton.   |
-| `log.txt` Log file     | Stores log messages consistently, no matter how many parts of the app are logging.             |
+| Componente                | Responsabilidade                                                                                                |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Classe Singleton `Logger` | Garante instância única, oferece acesso global via getInstance() e gerencia o log em arquivo.                   |
+| Classe `Main`             | Demonstra o uso do Singleton.                                                                                   |
+| Arquivo de Log `log.txt`  | Armazena as mensagens de log de forma consistente, independente de quantas partes da aplicação estejam logando. |
 
-## Design Benefits
+## Benefícios do Design
 
-* Controlled Access to Single Instance.
-* Global Point of Access.
-* Resource Efficiency.
-* Lazy Initialization.
-* Consistency Across the Application.
-* Ease of Maintenance and Testing.
+- Controle de acesso à única instância.
+- Ponto global de acesso.
+- Eficiência no uso de recursos.
+- Inicialização preguiçosa (lazy).
+- Consistência em toda a aplicação.
+- Facilidade de manutenção e testes.
 
-## Folder Structure
+## Estrutura de Pastas
 
-```
+```plaintext
 src/main/java/
 └── edu/fatec/ipp002/singleton/
     ├── logger/         # Singleton
-    ├── Main.java       # Usage
-    └── log.txt         # Log file
+    ├── Main.java       # Uso
+    └── log.txt         # Arquivo de log
 ```
 
-## Use Cases
+## Casos de Uso
 
-* **Configuration Manager:** To read app-wide settings (from a .properties, .env, or XML/JSON file) in one place.
-* **Database Connection Pool Manager:** To Manage DB connections centrally improves performance and avoids opening too many connections.
-* **Cache Manager:** A shared, in-memory cache that all parts of the app can read/write to.
-* **Thread Pool Manager:** Thread pools should be reused, not re-created every time a task is run.
-* **Authentication / Session Manager:** A single class tracking who is logged in or managing tokens avoids conflicts and ensures security.
-* **Device Drivers or Hardware Access Layer:** You usually want one controller to manage communication with specific hardware (e.g., printer, GPU).
-* **Game Settings or State Manager:** In game development, things like scoreboards, level data, or game settings should be globally accessible but consistently managed.
+- **Gerenciador de Configuração:** Para ler configurações globais do app (de .properties, .env, XML/JSON) num único lugar.
+- **Gerenciador de Pool de Conexões de Banco:** Gerenciar conexões DB centralizadamente melhora desempenho e evita excesso de conexões abertas.
+- **Gerenciador de Cache:** Cache compartilhado na memória que todas as partes do app podem ler/gravar.
+- **Gerenciador de Thread Pool:** Pools de threads devem ser reutilizados, não recriados a cada tarefa.
+- **Gerenciador de Autenticação/Sessão:** Uma única classe que controla quem está logado ou gerencia tokens evita conflitos e garante segurança.
+- **Drivers de Dispositivos ou Camada de Acesso a Hardware:** Normalmente se quer um controlador único para comunicação com hardware específico (ex: impressora, GPU).
+- **Gerenciador de Configurações ou Estado de Jogo:** Em desenvolvimento de jogos, placares, dados de níveis ou configurações devem ser acessíveis globalmente e gerenciados consistentemente.
 
-## Class Diagram
+## Diagrama de Classes
 
 ```mermaid
 classDiagram
@@ -72,10 +72,11 @@ classDiagram
     Logger --> Logger
 ```
 
-## Running
-Place yourself in the root folder where the `pom.xml` is located. Then, run the following commands:
+## Executando
 
-```Bash
+Estando na pasta raiz onde se encontra o `pom.xml`, execute os seguintes comandos:
+
+```bash
 mvn clean install
 mvn exec:java
 ```

@@ -1,57 +1,58 @@
-# File System Composite Pattern
+# Sistema de Arquivos com Padrão Composite
 
-## Project Summary
+## Resumo do Projeto
 
-**Project Name:** File System using the Composite Pattern
+**Nome do Projeto:** Sistema de Arquivos utilizando o Padrão Composite
 
-## Overview
+## Visão Geral
 
-This project demonstrates the **Composite Design Pattern** through a simplified file system model. It shows how to treat individual `files` (the **Leaf**) and `folders` (the **Composite**) (which may contain more files and folders) using a common interface, enabling recursive operations such as displaying structure.
+Este projeto demonstra o **Padrão de Projeto Composite** através de um modelo simplificado de sistema de arquivos. Ele mostra como tratar arquivos individuais (`files`) (os **Leafs**) e pastas (`folders`) (os **Composites**) — que podem conter mais arquivos e pastas — usando uma interface comum, permitindo operações recursivas como exibir a estrutura.
 
-## Goal
+## Objetivo
 
-To demonstrate the Composite Design Pattern by modeling a hierarchical file system where both `File` and `Folder` can be treated uniformly through a shared interface.
+Demonstrar o Padrão Composite modelando um sistema de arquivos hierárquico onde tanto `File` quanto `Folder` podem ser tratados de forma uniforme através de uma interface compartilhada.
 
-## Key Components
+## Principais Componentes
 
-| Component                  | Responsibility                                            |
-| -------------------------- | --------------------------------------------------------- |
-| `Component` interface        | Declares interface for all elements |
-| `Leaf` class       | Represents single objects (no children)   |
-| `Composite` class     | Holds children and implements recursive ops             |
-| `Client` | Uses the interface to treat all elements                              |
+| Componente            | Responsabilidade                                |
+| --------------------- | ----------------------------------------------- |
+| Interface `Component` | Declara a interface para todos os elementos     |
+| Classe `Leaf`         | Representa objetos únicos (sem filhos)          |
+| Classe `Composite`    | Contém filhos e implementa operações recursivas |
+| `Client`              | Usa a interface para tratar todos os elementos  |
 
-## Design Benefits
+## Benefícios do Design
 
-* Uniformity: Treat Objects and Groups the Same Way.
-* Recursive Structures Made Easy.
-* Open/Closed Principle (OCP).
-* Simplified Client Code.
-* Improves Code Reusability and Testability.
-* Clear Domain Modeling.
+- Uniformidade: Tratar objetos e grupos da mesma forma.
+- Estruturas recursivas de forma simples.
+- Princípio Aberto/Fechado (OCP).
+- Código do cliente simplificado.
+- Melhora a reutilização e testabilidade do código.
+- Modelagem de domínio clara.
 
-## Folder Structure
+## Estrutura de Pastas
 
-```
+```plaintext
 src/main/java/
 └── edu/fatec/ipp002/composite/
     ├── component/          # FileSystemItem
     ├── composite/          # Folder
     ├── leaf/               # File
-    └── Main.java           # Entry point with usage example
+    └── Main.java           # Ponto de entrada com exemplo de uso
 ```
 
-## Use Cases
+## Casos de Uso
 
-* **Modeling a File System:** Simulating or managing files and folders in a hierarchical structure.
-* **UI Component Hierarchies:** Graphical UIs often treat buttons, panels, labels, etc., as elements that can contain other elements.
-* **Organizational Hierarchies:** Modeling a company’s structure with managers and employees.
-* **Scene Graphs in Games or Graphics Engines:** Objects in a scene (e.g., models, lights, cameras) can be composed and grouped.
-* **Menu Systems:** Menus and submenus in applications or websites.
-* **Document Structures (e.g., HTML, XML, PDFs):** Texts made of paragraphs, tables, images, etc., where components can be nested.
-* **Permission and Role Hierarchies:** In complex security systems, roles or permissions can be grouped.
+- **Modelagem de Sistema de Arquivos:** Simular ou gerenciar arquivos e pastas em uma estrutura hierárquica.
+- **Hierarquias de Componentes de UI:** Interfaces gráficas tratam botões, painéis, rótulos, etc., como elementos que podem conter outros elementos.
+- **Hierarquias Organizacionais:** Modelar a estrutura de uma empresa com gestores e funcionários.
+- **Scene Graphs em Jogos ou Motores Gráficos:** Objetos em uma cena (modelos, luzes, câmeras) podem ser compostos e agrupados.
+- **Sistemas de Menu:** Menus e submenus em aplicativos ou sites.
+- **Estruturas de Documentos (HTML, XML, PDFs):** Textos compostos por parágrafos, tabelas, imagens, etc., onde os componentes podem ser aninhados.
+- **Hierarquias de Permissão e Papel:** Em sistemas de segurança complexos, papéis ou permissões podem ser agrupados.
 
-## Class Diagram
+## Diagrama de Classes
+
 ```mermaid
 classDiagram
     class FileSystemItem {
@@ -66,7 +67,7 @@ classDiagram
     }
 
     class Folder {
-        <<Composite>>>
+        <<Composite>>
         -name: String
         -children: List~FileSystemItem~
         +add(item: FileSystemItem) void
@@ -84,21 +85,22 @@ classDiagram
     FileSystemItem <--o Folder
 ```
 
-## Anti-Pattern Example: Leafs Implementing Useless Composite Methods
+## Exemplo de Anti-Padrão: Leafs Implementando Métodos de Composite Inúteis
 
-Sometimes developers force leaf classes (like `File`) to implement methods like `add()` or `remove()` which only make sense for composites (`Folder`).
+Às vezes desenvolvedores forçam classes folha (como `File`) a implementar métodos como `add()` ou `remove()` que só fazem sentido para composites (`Folder`).
 
-> `File` has a stubbed or empty `add(FileSystemItem)` method just to fit the interface.
+> `File` possui um método `add(FileSystemItem)` vazio ou inútil apenas para se encaixar na interface.
 
-`Why it's bad`:
-* Breaks the Liskov Substitution Principle
-* Leads to misleading or confusing APIs
-* Makes the code fragile and harder to maintain
+`Por que isso é ruim`:
 
-`Best Practice`: Use the transparent composite model only when all methods are meaningful to all types, or separate interfaces if not.
- 
- ```mermaid
- classDiagram
+- Quebra o Princípio da Substituição de Liskov (LSP)
+- Leva a APIs enganosas ou confusas
+- Deixa o código frágil e difícil de manter
+
+`Melhor Prática`: Use o modelo composite transparente apenas quando todos os métodos fizerem sentido para todos os tipos, ou então separe as interfaces quando não fizerem.
+
+```mermaid
+classDiagram
     class FileSystemItem {
         <<interface>>
         +add(item: FileSystemItem) void
@@ -113,7 +115,7 @@ Sometimes developers force leaf classes (like `File`) to implement methods like 
     }
 
     class Folder {
-        <<Composite>>>
+        <<Composite>>
         -name: String
         -children: List~FileSystemItem~
         +add(item: FileSystemItem) void
@@ -129,12 +131,13 @@ Sometimes developers force leaf classes (like `File`) to implement methods like 
     FileSystemItem <|.. File
     FileSystemItem <|.. Folder
     FileSystemItem <--o Folder
- ```
+```
 
-## Running
-Place yourself in the root folder where the `pom.xml` is located — whether for a *pattern* or *anti-pattern* project. Then, run the following commands:
+## Executando
 
-```Bash
+Estando na pasta raiz onde se encontra o `pom.xml` — seja para o projeto _padrão_ ou _anti-padrão_ —, execute os seguintes comandos:
+
+```bash
 mvn clean install
 mvn exec:java
 ```

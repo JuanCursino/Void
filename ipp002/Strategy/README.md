@@ -1,49 +1,48 @@
-# Payment Strategy Pattern
+# Sistema de Pagamento com Padrão Strategy
 
-## Project Summary
+## Resumo do Projeto
 
-**Project Name:** Flexible Payment System using the Strategy Pattern
+**Nome do Projeto:** Sistema de Pagamento Flexível utilizando o Padrão Strategy
 
-## Overview
+## Visão Geral
 
-This project demonstrates the use of the **Strategy Design Pattern** to create a flexible and maintainable payment system. It models a basic online shopping scenario where customers can select different payment methods (e.g., Credit Card, PayPal, Pix) at checkout.
+Este projeto demonstra o uso do **Padrão de Projeto Strategy** para criar um sistema de pagamento flexível e de fácil manutenção. Ele modela um cenário básico de compras online onde os clientes podem escolher diferentes métodos de pagamento (ex.: Cartão de Crédito, PayPal, Pix) no checkout.
 
-## Goal
+## Objetivo
 
-To decouple the payment processing logic from the main application, allowing new payment methods to be added with minimal changes to the existing codebase.
+Desacoplar a lógica de processamento de pagamento da aplicação principal, permitindo que novos métodos de pagamento sejam adicionados com mudanças mínimas no código existente.
 
-## Key Components
+## Principais Componentes
 
-* `PaymentStrategy` (interface): Defines a common method `pay(double amount)` for all payment types.
-* Concrete strategies:
+- `PaymentStrategy` (interface): Define um método comum `pay(double amount)` para todos os tipos de pagamento.
+- Estratégias concretas:
+  - `CreditCardPayment`
+  - `PayPalPayment`
+  - `PixPayment`
+- `ShoppingCart`: Classe de contexto que usa a estratégia de pagamento selecionada para realizar o checkout.
 
-  * `CreditCardPayment`
-  * `PayPalPayment`
-  * `PixPayment`
-* `ShoppingCart`: The context class that uses a selected payment strategy to perform checkout.
+## Benefícios do Design
 
-## Design Benefits
+- Segue o **Princípio Aberto/Fechado (OCP)**: facilmente extensível sem modificar a lógica principal.
+- Promove **reutilização de código e separação de responsabilidades**.
+- Suporte para **seleção em tempo de execução** dos algoritmos de pagamento.
 
-* Follows the **Open/Closed Principle**: easily extendable without modifying core logic.
-* Promotes **code reuse and separation of concerns**.
-* Supports **runtime selection** of payment algorithms.
+## Estrutura de Pastas
 
-## Folder Structure
-
-```
+```plaintext
 src/main/java/
 └── edu/fatec/ipp002/strategy/
-    ├── paymentmethod/             # Payment strategy interface and implementations
-    ├── model/                     # Core model: ShoppingCart
-    └── PatternApplication.java    # Entry point with usage example
+    ├── paymentmethod/             # Interface de strategy e implementações
+    ├── model/                     # Modelo principal: ShoppingCart
+    └── PatternApplication.java    # Ponto de entrada com exemplo de uso
 ```
 
-## Use Cases
+## Casos de Uso
 
-* Teaching and practicing the Strategy Design Pattern.
-* Prototype for systems that require interchangeable behaviors (e.g., payments, sorting algorithms, shipping options).
+- Ensino e prática do Padrão Strategy.
+- Protótipos de sistemas que exigem comportamentos intercambiáveis (ex.: pagamentos, algoritmos de ordenação, opções de envio).
 
-## Class Diagram
+## Diagrama de Classes
 
 ```mermaid
 classDiagram
@@ -76,9 +75,9 @@ classDiagram
     PaymentStrategy <|.. PixPayment
 ```
 
-## Anti-Pattern Example: Misusing Inheritance
+## Exemplo de Anti-Padrão: Uso Indevido de Herança
 
-Below is a class diagram showing a common anti-pattern when implementing Strategy: using inheritance without reuse.
+Abaixo está um diagrama de classes que mostra um anti-padrão comum ao implementar Strategy: usar herança sem reaproveitamento.
 
 ```mermaid
 classDiagram
@@ -110,17 +109,18 @@ classDiagram
     PaymentStrategy <|-- PixPayment
 ```
 
-> 🚫 In this version, `PaymentStrategy` is a superclass instead of an interface, and no code is actually reused. Subclasses override `pay()` without leveraging inheritance — making this an anti-pattern.
+> 🚫 Nesta versão, `PaymentStrategy` é uma superclasse em vez de uma interface, e nenhum código é realmente reaproveitado. As subclasses sobrescrevem `pay()` sem aproveitar a herança — tornando isso um anti-padrão.
 
-## Next Steps (Optional)
+## Próximos Passos (Opcional)
 
-* Add new strategies like Cryptocurrency or Boleto.
-* Integrate discount strategies or tax calculations using the same pattern.
-* Apply unit tests for each strategy.
+- Adicionar novas estratégias como Criptomoeda ou Boleto.
+- Integrar estratégias de desconto ou cálculos de imposto utilizando o mesmo padrão.
+- Aplicar testes unitários para cada estratégia.
 
-## Running
-Place yourself in the root folder where the `pom.xml` is located — whether for a *pattern* or *anti-pattern* project. Then, run the following commands:
+## Executando
 
-```Bash
+Estando na pasta raiz onde se encontra o `pom.xml` — seja para o projeto _padrão_ ou _anti-padrão_ —, execute os seguintes comandos:
+
+```bash
 mvn clean spring-boot:run
 ```
